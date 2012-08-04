@@ -4,6 +4,7 @@ import org.es4j.dotnet.Stream;
 import org.es4j.exceptions.ArgumentException;
 import org.es4j.serialization.api.ISerialize;
 import org.es4j.serialization.dotnet.*;
+import org.es4j.util.GenericType;
 import org.es4j.util.logging.ILog;
 import org.es4j.util.logging.LogFactory;
 
@@ -67,8 +68,7 @@ public class RijndaelSerializer implements ISerialize {
 
 
     @Override // virtual
-    public <T> T deserialize(Stream input) {
-        T type = null;
+    public <T> T deserialize(Stream input, GenericType<T> type) {
         logger.verbose(Messages.DeserializingStream(), type.getClass().getName());
 
         try/*using*/ (RijndaelManaged rijndael = new RijndaelManaged()) {
@@ -78,7 +78,7 @@ public class RijndaelSerializer implements ISerialize {
 
             try/*using*/ (ICryptoTransform decryptor = rijndael.createDecryptor()) {
                 try/*using*/ (CryptoStream decryptedStream = new CryptoStream(input, decryptor, CryptoStreamMode.Read)) {
-                    return this.inner.deserialize/*<T>*/(decryptedStream);
+                    return this.inner.deserialize/*<T>*/(decryptedStream, type);
                 }
             }
         }

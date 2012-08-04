@@ -7,6 +7,7 @@ import org.es4j.util.logging.LogFactory;
 import org.es4j.serialization.api.ISerialize;
 import org.es4j.serialization.dotnet.CompressionMode;
 import org.es4j.serialization.dotnet.DeflateStream;
+import org.es4j.util.GenericType;
 //using System.IO;
 //using System.IO.Compression;
 
@@ -32,11 +33,11 @@ public class GzipSerializer implements ISerialize {
     }
 
     @Override  // virtual
-    public <T> T deserialize(Stream input) {
+    public <T> T deserialize(Stream input, GenericType<T> type) {
         T object = null;
         logger.verbose(Messages.DeserializingStream(), object.getClass().getName());
         try/*using*/ (DeflateStream decompress = new DeflateStream(input, CompressionMode.Decompress, true)) {
-            return this.inner.deserialize(decompress);
+            return this.inner.deserialize(decompress, type);
         }
         catch(IOException ex) {
             throw new UnsupportedOperationException("Not yet implemented");

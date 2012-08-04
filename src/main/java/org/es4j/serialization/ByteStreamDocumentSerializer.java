@@ -5,6 +5,7 @@ import org.es4j.serialization.api.ISerialize;
 import org.es4j.serialization.api.SerializationExtensions;
 import org.es4j.serialization.dotnet.Convert;
 import org.es4j.serialization.dotnet.FormatException;
+import org.es4j.util.GenericType;
 import org.es4j.util.logging.ILog;
 import org.es4j.util.logging.LogFactory;
 
@@ -25,8 +26,7 @@ public class ByteStreamDocumentSerializer implements IDocumentSerializer {
     }
 
     @Override
-    public <T> T deserialize(Object document) {
-        T type = null;
+    public <T> T deserialize(Object document, GenericType<T> type) {
         logger.verbose(Messages.DeserializingStream(), type.getClass().getName());
 
         byte[] bytes = null;
@@ -36,7 +36,7 @@ public class ByteStreamDocumentSerializer implements IDocumentSerializer {
         else if (document instanceof byte[]) {
             bytes = (byte[])document;
         }
-        return SerializationExtensions.deserialize(this.serializer, bytes);
+        return SerializationExtensions.deserialize(this.serializer, type, bytes);
     }
 
     private static byte[] fromBase64(String value) {

@@ -4,6 +4,7 @@ import org.es4j.dotnet.Stream;
 import org.es4j.serialization.api.ISerialize;
 import org.es4j.serialization.dotnet.BinaryFormatter;
 import org.es4j.serialization.dotnet.IFormatter;
+import org.es4j.util.GenericType;
 import org.es4j.util.logging.ILog;
 import org.es4j.util.logging.LogFactory;
 
@@ -14,8 +15,8 @@ import org.es4j.util.logging.LogFactory;
 
 public class BinarySerializer implements ISerialize {
 
-    private static final ILog logger = LogFactory.buildLogger(BinarySerializer.class);
-    private final IFormatter formatter = new BinaryFormatter();
+    private static final ILog       logger    = LogFactory.buildLogger(BinarySerializer.class);
+    private        final IFormatter formatter = new BinaryFormatter();
 
     // virtusl
     @Override
@@ -25,10 +26,10 @@ public class BinarySerializer implements ISerialize {
     }
 
     @Override
-    public <T> T deserialize(Stream input) {
+    public <T> T deserialize(Stream input, GenericType<T> type) {
         T object = null;
         logger.verbose(Messages.DeserializingStream(), object.getClass().getName());
-        object = this.formatter.deserialize(input);
+        object = this.formatter.deserialize(input, type);
         return object;
     }
 }
