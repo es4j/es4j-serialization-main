@@ -1,6 +1,6 @@
 package org.es4j.serialization.dotnet;
 
-import org.es4j.dotnet.Stream;
+import org.es4j.dotnet.streams.Stream;
 import org.es4j.util.GenericType;
 
 

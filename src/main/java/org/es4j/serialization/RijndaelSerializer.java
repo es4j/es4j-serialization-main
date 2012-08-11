@@ -1,6 +1,10 @@
 package org.es4j.serialization;
 
-import org.es4j.dotnet.Stream;
+import org.es4j.dotnet.streams.CryptoStream;
+import org.es4j.dotnet.streams.CryptoStreamMode;
+import org.es4j.dotnet.streams.ICryptoTransform;
+import org.es4j.dotnet.streams.IndisposableStream;
+import org.es4j.dotnet.streams.Stream;
 import org.es4j.exceptions.ArgumentException;
 import org.es4j.serialization.api.ISerialize;
 import org.es4j.serialization.dotnet.*;

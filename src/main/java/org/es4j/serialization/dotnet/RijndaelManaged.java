@@ -1,5 +1,7 @@
 package org.es4j.serialization.dotnet;
 
+import org.es4j.dotnet.streams.ICryptoTransform;
+
 public class RijndaelManaged implements AutoCloseable {
 
     @Override

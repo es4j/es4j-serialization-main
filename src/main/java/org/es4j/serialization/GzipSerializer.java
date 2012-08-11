@@ -1,13 +1,14 @@
 package org.es4j.serialization;
 
 import java.io.IOException;
-import org.es4j.dotnet.Stream;
+import org.es4j.dotnet.streams.CompressionMode;
+import org.es4j.dotnet.streams.DeflateStream;
+import org.es4j.dotnet.streams.Stream;
+import org.es4j.serialization.api.ISerialize;
+import org.es4j.util.GenericType;
 import org.es4j.util.logging.ILog;
 import org.es4j.util.logging.LogFactory;
-import org.es4j.serialization.api.ISerialize;
-import org.es4j.serialization.dotnet.CompressionMode;
-import org.es4j.serialization.dotnet.DeflateStream;
-import org.es4j.util.GenericType;
+
 //using System.IO;
 //using System.IO.Compression;
 
